@@ -29,6 +29,8 @@ namespace mate
     class Group
     {
     public:
+        using dmn_type = dmn;
+        using opr_type = opr;
         using set_type = Set<dmn>;
 
         inline void print()
@@ -52,10 +54,6 @@ namespace mate
     auto make_group(_Set&& set)
     {
         using Group_t = Group<_dmn, _opr>;
-        using Set_t = std::decay_t<_Set>;
-
-        // Type of _Set must match Group's set_type.
-        static_assert(std::is_same<Set_t, typename Group_t::set_type>());
 
         namespace rg = ranges;
         using namespace rg::views;

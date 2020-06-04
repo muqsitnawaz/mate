@@ -5,8 +5,8 @@
 
 namespace mate
 {
-    template <Domain domain>
-    inline domain multiply(domain op1, domain op2) noexcept
+    template <Domain dmn>
+    inline constexpr dmn multiply(dmn op1, dmn op2) noexcept
     {
         return op1 * op2;
     }

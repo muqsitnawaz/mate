@@ -3,6 +3,7 @@
 
 #include "mate/algorithm.hpp"
 #include "mate/group.hpp"
+#include "mate/quotient_group.hpp"
 
 using namespace mate;
 
@@ -30,6 +31,10 @@ int main()
 //    Set set3 = {0, 1, -1};
 //    auto group3 = make_group<int, Addition>(set3);
 
-    Set set4 = { 0 };
-    auto group4 = make_group<int, Addition>(set4);
+    // Works.
+//    Set set4 = { 0 };
+//    auto group4 = make_group<int, Addition>(set4);
+
+    // Works.
+    QuotientGroup<int, Addition> quotient_group();
 }

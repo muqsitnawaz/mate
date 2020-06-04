@@ -6,10 +6,10 @@
 
 namespace mate
 {
-    template <SignedInteger signed_integer, Operation operation>
-    signed_integer get_inverse(signed_integer value) noexcept
+    template <SignedInteger sig_int, Operation opr>
+    inline constexpr sig_int get_inverse(sig_int value) noexcept
     {
-        if constexpr (std::is_same_v<operation, Addition>)
+        if constexpr (is_add_t<opr>())
         {
             return -value;
         }

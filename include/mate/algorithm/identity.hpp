@@ -8,27 +8,25 @@
 
 namespace mate
 {
-    template <Domain domain, Operation operation>
-    constexpr domain get_identity()
+    template <Domain dmn, Operation opr>
+    inline constexpr dmn get_identity()
     {
-        if constexpr (std::is_integral_v<domain>)
+        if constexpr (is_signed_integral_t<dmn>())
         {
-            if constexpr (std::is_same_v<operation, Addition>)
+            if constexpr (is_add_t<opr>())
             {
-                return static_cast<domain>(0);
-            }
-            else if (std::is_same_v<operation, Multiplication>)
-            {
-                return static_cast<domain>(1);
+                // Return additive identity.
+                return static_cast<dmn>(0);
             }
             else
             {
-                throw std::runtime_error("Unknown operation for integers domain.");
+                // Return multiplicative identity.
+                return static_cast<dmn>(1);
             }
         }
         else
         {
-            throw std::runtime_error("Unknown domain.");
+            throw std::logic_error("Unknown domain.");
         }
     }
 

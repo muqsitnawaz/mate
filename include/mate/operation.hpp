@@ -22,6 +22,6 @@ namespace mate
         return std::is_same_v<T, Multiplication>;
     }
 
-    template <typename Op>
-    concept Operation = is_add_t<Op>() || is_multiply_t<Op>();
+    template <typename T>
+    concept Operation = is_add_t<T>() || is_multiply_t<T>();
 }

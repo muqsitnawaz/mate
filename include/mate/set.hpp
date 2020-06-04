@@ -7,6 +7,6 @@
 
 namespace mate
 {
-    template <Domain domain>
-    using Set = std::unordered_set<domain>;
+    template <Domain dmn>
+    using Set = std::unordered_set<dmn>;
 }
