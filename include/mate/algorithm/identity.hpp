@@ -1,18 +1,15 @@
 
 #pragma once
 
-#include <optional>
-#include <unordered_set>
-
 #include <range/v3/algorithm/find.hpp>
 
-#include "domain.hpp"
-#include "operation.hpp"
+#include "../domain.hpp"
+#include "../operation.hpp"
 
 namespace mate
 {
     template <Domain domain, Operation operation>
-    domain get_identity()
+    constexpr domain get_identity()
     {
         if constexpr (std::is_integral_v<domain>)
         {
@@ -26,22 +23,22 @@ namespace mate
             }
             else
             {
-                throw std::logic_error("Unknown operation.");
+                throw std::runtime_error("Unknown operation for integers domain.");
             }
         }
         else
         {
-            throw std::logic_error("Unknown domain.");
+            throw std::runtime_error("Unknown domain.");
         }
     }
 
     template <typename Set>
-    using Domain_type = typename Set::value_type;
+    using Domain_type = typename std::decay_t<Set>::value_type;
 
     template <Operation operation, typename Set>
     inline bool has_identity(Set&& set)
     {
-        auto identity = get_identity<Domain_type<std::decay_t<Set>>, operation>();
+        auto identity = get_identity<Domain_type<Set>, operation>();
         return ranges::find(set, identity) != ranges::end(set);
     }
 }

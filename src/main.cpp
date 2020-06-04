@@ -1,7 +1,8 @@
 
 #include <fmt/format.h>
 
-#include <mate/algorithms.hpp>
+#include "mate/algorithm.hpp"
+#include "mate/group.hpp"
 
 using namespace mate;
 
@@ -10,10 +11,25 @@ int main()
     fmt::print("Additive identity: {}\n", mate::get_identity<int, Addition>());
     fmt::print("Multiplicative identity: {}\n", mate::get_identity<int, Multiplication>());
 
-    using IntSet = std::unordered_set<int>;
+    using Set = std::unordered_set<int>;
 
-    IntSet set = {1, 2, 3};
+    Set set = {1, 2, 3};
 
     fmt::print("Has additive identity: {}\n", has_identity<Addition>(set));
     fmt::print("Has multiplicative identity: {}\n", has_identity<Multiplication>(set));
+
+    // Throws an exception -- not closed.
+//    Set set1 = {0, 1, 2, 3, -3, -2, -1};
+//    auto group1 = make_group<int, Addition>(set1);
+
+    // Throws an exception -- not invertible.
+//    Set set2 = {-1, 1};
+//    auto group2 = make_group<int, Multiplication>(set2);
+
+    // Throws an exception -- not closed.
+//    Set set3 = {0, 1, -1};
+//    auto group3 = make_group<int, Addition>(set3);
+
+    Set set4 = { 0 };
+    auto group4 = make_group<int, Addition>(set4);
 }
