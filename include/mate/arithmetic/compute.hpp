@@ -1,16 +1,16 @@
 
 #pragma once
 
-#include "../domain.hpp"
-#include "../operation.hpp"
+#include "mate/domain.hpp"
+#include "mate/operation.hpp"
 
-#include "../algorithm/add.hpp"
-#include "../algorithm/multiply.hpp"
+#include "mate/arithmetic/add.hpp"
+#include "mate/arithmetic/multiply.hpp"
 
 namespace mate
 {
     template <Domain dmn, Operation opr>
-    inline dmn evaluate(dmn op1, dmn op2)
+    inline dmn compute(dmn op1, dmn op2)
     {
         if constexpr (is_add_t<opr>())
         {

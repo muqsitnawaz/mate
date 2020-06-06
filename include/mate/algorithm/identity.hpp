@@ -11,9 +11,9 @@ namespace mate
     template <Domain dmn, Operation opr>
     inline constexpr dmn get_identity()
     {
-        if constexpr (is_signed_integral_t<dmn>())
+        if constexpr (meta_::is_signed_integral_t<dmn>())
         {
-            if constexpr (is_add_t<opr>())
+            if constexpr (meta_::is_add_t<opr>())
             {
                 // Return additive identity.
                 return static_cast<dmn>(0);

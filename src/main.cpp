@@ -1,7 +1,6 @@
 
 #include <fmt/format.h>
 
-#include "mate/algorithm.hpp"
 #include "mate/group.hpp"
 #include "mate/quotient_group.hpp"
 
@@ -9,8 +8,8 @@ using namespace mate;
 
 int main()
 {
-    fmt::print("Additive identity: {}\n", mate::get_identity<int, Addition>());
-    fmt::print("Multiplicative identity: {}\n", mate::get_identity<int, Multiplication>());
+    fmt::print("Additive identity: {}\n", get_identity<int, Addition>());
+    fmt::print("Multiplicative identity: {}\n", get_identity<int, Multiplication>());
 
     using Set = std::unordered_set<int>;
 
@@ -36,5 +35,9 @@ int main()
 //    auto group4 = make_group<int, Addition>(set4);
 
     // Works.
-    QuotientGroup<int, Addition> quotient_group();
+    auto quot_group = make_quotient_group<int, Addition>(5);
+    quot_group.print();
+
+    auto quot_group1 = make_quotient_group<uint, Addition>(5);
+    quot_group1.print();
 }

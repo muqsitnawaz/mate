@@ -17,7 +17,7 @@
 #include "algorithm/identity.hpp"
 #include "algorithm/inverse.hpp"
 
-#include "utility/evaluate.hpp"
+#include "mate/arithmetic/compute.hpp"
 #include "utility/name.hpp"
 
 namespace mate
@@ -66,7 +66,7 @@ namespace mate
         }
 
         // Verify that set contains inverses for each element.
-        if constexpr (is_signed_integral_t<_dmn>())
+        if constexpr (meta_::is_signed_integral_t<_dmn>())
         {
             // TODO: No need to compute inverse of each element -- early break (use find_if).
             auto fn_get_inverse = [](const auto elem) { return get_inverse<_dmn, _opr>(elem); };
@@ -94,7 +94,7 @@ namespace mate
         auto pairs = ranges::views::join(set | ranges::views::transform(fn_make_pairs));
         auto fn_not_exists = [&set](auto p)
         {
-            return rg::find(set, evaluate<_dmn, _opr>(p.first, p.second)) == rg::end(set);
+            return rg::find(set, compute<_dmn, _opr>(p.first, p.second)) == rg::end(set);
         };
         auto closed_under_op = ranges::find_if(pairs, fn_not_exists) == ranges::end(pairs);
         if (!closed_under_op)
