@@ -3,6 +3,7 @@
 
 #include <range/v3/algorithm/find.hpp>
 
+#include "../alias.hpp"
 #include "../domain.hpp"
 #include "../operation.hpp"
 
@@ -30,11 +31,8 @@ namespace mate
         }
     }
 
-    template <typename Set>
-    using Domain_type = typename std::decay_t<Set>::value_type;
-
     template <Operation operation, typename Set>
-    inline bool has_identity(Set&& set)
+    inline constexpr bool has_identity(Set&& set) noexcept
     {
         auto identity = get_identity<Domain_type<Set>, operation>();
         return ranges::find(set, identity) != ranges::end(set);

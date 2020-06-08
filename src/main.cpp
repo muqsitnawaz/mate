@@ -27,17 +27,17 @@ int main()
 //    auto group2 = make_group<int, Multiplication>(set2);
 
     // Throws an exception -- not closed.
-//    Set set3 = {0, 1, -1};
-//    auto group3 = make_group<int, Addition>(set3);
+    Set set3 = {0, 1, -1};
+    auto group3 = make_group<int, Addition>(set3);
 
     // Works.
-//    Set set4 = { 0 };
-//    auto group4 = make_group<int, Addition>(set4);
+    Set set4 = { 0 };
+    auto group4 = make_group<int, Addition>(set4);
 
     // Works.
-    auto quot_group = make_quotient_group<int, Addition>(5);
-    quot_group.print();
-
-    auto quot_group1 = make_quotient_group<uint, Addition>(5);
-    quot_group1.print();
+//    auto quot_group = make_quotient_group<int, Addition>(5);
+//    quot_group.print();
+//
+//    auto quot_group1 = make_quotient_group<uint, Addition>(5);
+//    quot_group1.print();
 }
