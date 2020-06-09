@@ -7,6 +7,18 @@
 
 namespace mate
 {
+    template <typename>
+    struct is_std_unordered_set : std::false_type {};
+
+    template <typename V, typename H, typename P, typename A>
+    struct is_std_unordered_set<std::unordered_set<V, H, P, A>> : std::true_type {};
+
+    template <typename T>
+    inline constexpr bool is_set_v() noexcept
+    {
+        return is_std_unordered_set<T>::value;
+    }
+
     template <Domain dmn>
     using Set = std::unordered_set<dmn>;
 }

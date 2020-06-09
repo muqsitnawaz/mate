@@ -3,6 +3,7 @@
 
 #include "mate/group.hpp"
 #include "mate/quotient_group.hpp"
+#include "mate/algorithm/prime.hpp"
 
 using namespace mate;
 
@@ -43,4 +44,7 @@ int main()
     Modulus<uint> mod5(5u);
     auto quot_group1 = make_quotient_group<uint, Addition>(set5, mod5);
     quot_group1.print();
+
+    // Miller rabin test fails when 65537 is int.
+    fmt::print("Is prime: {}.\n", is_prime<uint>(65537, 10));
 }

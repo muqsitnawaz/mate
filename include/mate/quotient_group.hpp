@@ -13,10 +13,10 @@
 namespace mate
 {
     template <Domain _dmn, Operation _opr, typename _Set>
-    auto make_quotient_group(_Set&& set, Modulus<_dmn> modulus);
+    auto make_quotient_group(_Set&& set, Modulus <_dmn> modulus);
 
     template <Domain _dmn, Operation _opr>
-    auto make_quotient_group(Modulus<_dmn> modulus);
+    auto make_quotient_group(Modulus <_dmn> modulus);
 
     template <Domain dmn, Operation opr>
     class QuotientGroup
@@ -43,17 +43,17 @@ namespace mate
         QuotientGroup() = default;
 
         template <Domain _dmn, Operation _opr>
-        friend auto make_quotient_group(Modulus<_dmn> modulus);
+        friend auto make_quotient_group(Modulus <_dmn> modulus);
 
         template <Domain _dmn, Operation _opr, typename _Set>
-        friend auto make_quotient_group(_Set&& set, Modulus<_dmn> modulus);
+        friend auto make_quotient_group(_Set&& set, Modulus <_dmn> modulus);
     };
 
     /**
      * Creates the group Z/mZ.
      */
     template <Domain _dmn, Operation _opr>
-    auto make_quotient_group(Modulus<_dmn> modulus)
+    auto make_quotient_group(Modulus <_dmn> modulus)
     {
         std::vector<_dmn> elems(modulus.width());
         if constexpr (meta_::is_add_t<_opr>())
@@ -74,7 +74,7 @@ namespace mate
     }
 
     template <Domain _dmn, Operation _opr, typename _Set>
-    auto make_quotient_group(_Set&& set, Modulus<_dmn> modulus)
+    auto make_quotient_group(_Set&& set, Modulus <_dmn> modulus)
     {
         // Verify set is a group.
         if (!has_identity<_opr>(set))
@@ -93,7 +93,7 @@ namespace mate
         using Group_t = QuotientGroup<_dmn, _opr>;
 
         Group_t group;
-        group.elements_ = mod(std::forward<_Set>(set), modulus);
+        group.elements_ = mod<_dmn, _Set>(std::forward<_Set>(set), *modulus);
         return group;
     }
 }
