@@ -3,6 +3,7 @@
 
 #include <range/v3/numeric/iota.hpp>
 
+#include "algorithm/mod.hpp"
 #include "domain.hpp"
 #include "operation.hpp"
 #include "modulus.hpp"
@@ -48,11 +49,12 @@ namespace mate
         friend auto make_quotient_group(_Set&& set, Modulus<_dmn> modulus);
     };
 
+    /**
+     * Creates the group Z/mZ.
+     */
     template <Domain _dmn, Operation _opr>
     auto make_quotient_group(Modulus<_dmn> modulus)
     {
-        using Group_t = QuotientGroup<_dmn, _opr>;
-
         std::vector<_dmn> elems(modulus.width());
         if constexpr (meta_::is_add_t<_opr>())
         {
@@ -63,17 +65,35 @@ namespace mate
             throw std::logic_error("Unimplemented.");
         }
 
+        using Group_t = QuotientGroup<_dmn, _opr>;
+        using Set_t = typename Group_t::set_type;
+
         Group_t group;
-        group.elements_ = typename Group_t::set_type(std::make_move_iterator(elems.begin()),
-                std::make_move_iterator(elems.end()));
+        group.elements_ = Set_t(std::make_move_iterator(elems.begin()), std::make_move_iterator(elems.end()));
         return group;
     }
 
     template <Domain _dmn, Operation _opr, typename _Set>
     auto make_quotient_group(_Set&& set, Modulus<_dmn> modulus)
     {
-        // TODO: Verify set is a group.
+        // Verify set is a group.
+        if (!has_identity<_opr>(set))
+        {
+            throw std::invalid_argument(fmt::format("Set doesn't have an identity w.r.t {}.", name<_opr>()));
+        }
+        if (!has_inverses<_dmn, _opr>(set, modulus))
+        {
+            throw std::invalid_argument("Set doesn't contain an inverse of each element.");
+        }
+        if (!is_closed<_dmn, _opr>(set, modulus))
+        {
+            throw std::invalid_argument(fmt::format("Set is not closed under {}.", name<_opr>()));
+        }
 
-        // TODO: Create and store quotient group.
+        using Group_t = QuotientGroup<_dmn, _opr>;
+
+        Group_t group;
+        group.elements_ = mod(std::forward<_Set>(set), modulus);
+        return group;
     }
 }

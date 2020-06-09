@@ -12,7 +12,7 @@ namespace mate
     template <Domain dmn, Operation opr>
     inline constexpr dmn get_identity()
     {
-        if constexpr (meta_::is_signed_integral_t<dmn>())
+        if constexpr (std::is_integral<dmn>())
         {
             if constexpr (meta_::is_add_t<opr>())
             {

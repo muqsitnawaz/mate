@@ -51,15 +51,9 @@ namespace mate
     template <Domain _dmn, Operation _opr, typename _Set>
     auto make_group(_Set&& set)
     {
-        using Group_t = Group<_dmn, _opr>;
-
-        namespace rg = ranges;
-        using namespace rg::views;
-
         if (!has_identity<_opr>(set))
         {
-            auto msg = fmt::format("Set doesn't have an identity w.r.t {}.", name<_opr>());
-            throw std::invalid_argument(msg);
+            throw std::invalid_argument(fmt::format("Set doesn't have an identity w.r.t {}.", name<_opr>()));
         }
         if (!has_inverses<_opr>(set))
         {
@@ -69,6 +63,8 @@ namespace mate
         {
             throw std::invalid_argument(fmt::format("Set is not closed under {}.", name<_opr>()));
         }
+
+        using Group_t = Group<_dmn, _opr>;
 
         Group_t group;
         group.elements_ = std::forward<typename Group_t::set_type>(set);

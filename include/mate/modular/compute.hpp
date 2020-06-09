@@ -6,19 +6,20 @@
 
 #include "mate/arithmetic/add.hpp"
 #include "mate/arithmetic/multiply.hpp"
+#include "mod.hpp"
 
 namespace mate
 {
     template <Domain dmn, Operation opr>
-    inline constexpr dmn compute(dmn op1, dmn op2)
+    inline constexpr dmn compute(dmn op1, dmn op2, dmn modulus)
     {
         if constexpr (meta_::is_add_t<opr>())
         {
-            return add(op1, op2);
+            return mod(add(op1, op2), modulus);
         }
         else
         {
-            return multiply(op1, op2);
+            return mod(multiply(op1, op2), modulus);
         }
     }
 }
