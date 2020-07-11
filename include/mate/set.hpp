@@ -14,10 +14,7 @@ namespace mate
     struct is_std_unordered_set<std::unordered_set<V, H, P, A>> : std::true_type {};
 
     template <typename T>
-    inline constexpr bool is_set_v() noexcept
-    {
-        return is_std_unordered_set<T>::value;
-    }
+    inline constexpr bool is_set_v = is_std_unordered_set<std::decay_t<T>>::value;
 
     template <Domain dmn>
     using Set = std::unordered_set<dmn>;

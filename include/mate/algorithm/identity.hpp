@@ -16,12 +16,12 @@ namespace mate
         {
             if constexpr (meta_::is_add_t<opr>())
             {
-                // Return additive identity.
+                // Ådditive identity.
                 return static_cast<dmn>(0);
             }
             else
             {
-                // Return multiplicative identity.
+                // Multiplicative identity.
                 return static_cast<dmn>(1);
             }
         }
@@ -34,7 +34,7 @@ namespace mate
     template <Operation operation, typename Set>
     inline constexpr bool has_identity(Set&& set) noexcept
     {
-        auto identity = get_identity<Domain_type<Set>, operation>();
+        const auto identity = get_identity<Domain_type<Set>, operation>();
         return ranges::find(set, identity) != ranges::end(set);
     }
 }

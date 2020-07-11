@@ -49,7 +49,7 @@ namespace mate
             return set | rg::views::transform([elem](const auto v) { return std::make_pair(elem, v); });
         };
         auto pairs = ranges::views::join(set | ranges::views::transform(fn_make_pairs));
-        auto fn_not_exists = [&set, mod = *modulus](const auto p)
+        auto fn_not_exists = [&set, mod = static_cast<dmn>(modulus)](const auto p)
         {
             return rg::find(set, compute<dmn, opr>(p.first, p.second, mod)) == rg::end(set);
         };

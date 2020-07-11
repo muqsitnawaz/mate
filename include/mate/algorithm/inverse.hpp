@@ -22,7 +22,7 @@ namespace mate
         }
         else
         {
-            throw std::runtime_error("Multiplicative inverse is not defined over integers.");
+            throw std::runtime_error("Multiplicative inverse is undefined over integers.");
         }
     }
 
@@ -35,7 +35,7 @@ namespace mate
         }
         else
         {
-            throw std::runtime_error("Multiplicative inverse is not defined over integers.");
+            throw std::runtime_error("Multiplicative inverse is undefined over integers.");
         }
     }
 
@@ -44,6 +44,8 @@ namespace mate
     template <Operation opr, typename Set>
     inline constexpr bool has_inverses(Set&& set) noexcept
     {
+        static_assert(is_set_v<Set>);
+
         using namespace ranges::views;
         using dmn = Domain_type<Set>;
 
@@ -64,7 +66,7 @@ namespace mate
         // Verify that modulus and set domain is the same.
         static_assert(std::is_same_v<Domain_type<Set>, dmn>);
 
-        auto fn_get_inverse = [mod = *modulus](const auto elem)
+        auto fn_get_inverse = [mod = static_cast<dmn>(modulus)](const auto elem)
         {
             return inverse<dmn, opr>(elem, mod);
         };

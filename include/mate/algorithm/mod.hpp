@@ -9,10 +9,10 @@
 
 namespace mate
 {
-    template <Domain dmn, typename S, typename = std::enable_if_t<is_set_v<std::decay_t<S>>()>>
-    inline constexpr std::decay_t<S> mod(S&& set, dmn modulus)
+    template <Domain dmn, typename Set, typename = std::enable_if_t<is_set_v<Set>>>
+    inline constexpr std::decay_t<Set> mod(Set&& set, dmn modulus)
     {
-        using Set_t = std::decay_t<S>;
+        using Set_t = std::decay_t<Set>;
         static_assert(std::is_same_v<typename Set_t::value_type, dmn>);
 
         Set_t result;

@@ -9,6 +9,7 @@
 #include "modulus.hpp"
 
 #include "utility/type.hpp"
+#include "utility/mod.hpp"
 
 namespace mate
 {
@@ -53,7 +54,7 @@ namespace mate
      * Creates the group Z/mZ.
      */
     template <Domain _dmn, Operation _opr>
-    auto make_quotient_group(Modulus <_dmn> modulus)
+    auto make_quotient_group(Modulus<_dmn> modulus)
     {
         std::vector<_dmn> elems(modulus.width());
         if constexpr (meta_::is_add_t<_opr>())
@@ -93,7 +94,7 @@ namespace mate
         using Group_t = QuotientGroup<_dmn, _opr>;
 
         Group_t group;
-        group.elements_ = mod<_dmn, _Set>(std::forward<_Set>(set), *modulus);
+        group.elements_ = mod<_dmn, _Set>(std::forward<_Set>(set), modulus);
         return group;
     }
 }

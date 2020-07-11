@@ -36,7 +36,7 @@ int main()
     auto group4 = make_group<int, Addition>(set4);
 
     // Works.
-    auto quot_group = make_quotient_group<int, Addition>(5);
+    auto quot_group = make_quotient_group<int, Addition>(Modulus(5));
     quot_group.print();
 
     // Works.

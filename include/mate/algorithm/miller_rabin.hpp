@@ -4,6 +4,7 @@
 #include <random>
 
 #include "../modular/pow.hpp"
+#include "../utility/prng.hpp"
 
 namespace mate
 {
@@ -13,12 +14,8 @@ namespace mate
     template <Domain dmn>
     inline bool miller_rabin(dmn d, dmn n)
     {
-        // Pick a random number in [2..n-2]
-        // Corner cases make sure that n > 4
-        dmn a = 2 + rand() % (n - 4);
-
-        // Compute a^d % n
-        auto x = pow(a, d, n);
+        // Compute a^d % n where a is random in [2, n - 2].
+        auto x = pow(PRNG::get(std::make_pair<dmn, dmn>(2, n - 2)), d, n);
         if (x == 1 || x == n - 1)
         {
             return true;
@@ -34,12 +31,9 @@ namespace mate
             x = multiply(x, x, n);
             d *= 2;
 
-            if (x == 1)
-            { return false; }
-            if (x == n - 1)
-            { return true; }
+            if (x == 1) { return false; }
+            if (x == n - 1) { return true; }
         }
-
         return false;
     }
 }
