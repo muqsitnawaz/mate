@@ -36,3 +36,16 @@ set(INC_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 # Basic.
 add_executable(main src/main.cpp)
 target_include_directories(main PRIVATE ${INC_DIRS})
+
+function(mate_add_test TESTNAME EXENAME FIRSTSOURCE)
+    add_executable(${EXENAME} ${FIRSTSOURCE} ${ARGN})
+    target_link_libraries(${EXENAME} gtest gtest_main)
+    target_include_directories(${EXENAME} PRIVATE ${INC_DIRS})
+    add_test(${TESTNAME} ${EXENAME})
+endfunction(mate_add_test)
+
+if(MATE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(test)
+endif()
