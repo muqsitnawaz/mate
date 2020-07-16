@@ -30,7 +30,7 @@ namespace mate
             return modulus_bounds(value_);
         }
 
-        inline constexpr dmn width() const noexcept
+        inline constexpr size_t width() const noexcept
         {
             return modulus_width(value_);
         }

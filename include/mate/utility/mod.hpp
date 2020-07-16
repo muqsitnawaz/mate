@@ -22,16 +22,16 @@ namespace mate
     }
 
     template <Domain dmn>
-    inline constexpr dmn modulus_width(dmn modulus) noexcept
+    inline constexpr size_t modulus_width(dmn modulus) noexcept
     {
         const auto[lb, ub] = modulus_bounds(modulus);
         if constexpr (meta_::is_signed_integral_t<dmn>())
         {
-            return ub + abs(lb) + 1;
+            return static_cast<size_t>(ub + abs(lb) + static_cast<dmn>(1));
         }
         else if constexpr (meta_::is_unsigned_integral_t<dmn>())
         {
-            return ub;
+            return static_cast<size_t>(ub);
         }
     }
 }

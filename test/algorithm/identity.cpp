@@ -1,9 +1,18 @@
 
 #include <gtest/gtest.h>
 
-TEST(IdentityTest, ZeroPrecision)
+#include "mate/algorithm/identity.hpp"
+
+TEST(IdentityTest, Additive)
 {
-    ASSERT_TRUE(5 != 2);
+    constexpr auto identity = mate::get_identity<int, mate::Addition>();
+    EXPECT_EQ(identity, 0);
+}
+
+TEST(IdentityTest, Multiplicative)
+{
+    constexpr auto identity = mate::get_identity<int, mate::Multiplication>();
+    EXPECT_EQ(identity, 1);
 }
 
 int main(int argc, char** argv)
