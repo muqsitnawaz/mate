@@ -3,38 +3,15 @@
 
 #include <range/v3/algorithm/find.hpp>
 
-#include "../alias.hpp"
-#include "../domain.hpp"
-#include "../operation.hpp"
+#include "mate/core/identity.hpp"
+#include "mate/core/set.hpp"
 
 namespace mate
 {
-    template <Domain dmn, Operation opr>
-    inline constexpr dmn get_identity()
+    template <Operation operation, Set Set_>
+    inline constexpr bool has_identity(Set_&& set) noexcept
     {
-        if constexpr (std::is_integral<dmn>())
-        {
-            if constexpr (meta_::is_add_v<opr>)
-            {
-                // Ådditive identity.
-                return static_cast<dmn>(0);
-            }
-            else
-            {
-                // Multiplicative identity.
-                return static_cast<dmn>(1);
-            }
-        }
-        else
-        {
-            throw std::logic_error("Unknown domain.");
-        }
-    }
-
-    template <Operation operation, typename Set>
-    inline constexpr bool has_identity(Set&& set) noexcept
-    {
-        const auto identity = get_identity<Domain_type<Set>, operation>();
+        const auto identity = get_identity<Domain_type<Set_>, operation>();
         return ranges::find(set, identity) != ranges::end(set);
     }
 }

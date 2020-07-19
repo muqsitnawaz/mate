@@ -3,17 +3,16 @@
 
 #include <range/v3/algorithm/for_each.hpp>
 
-#include "../modular/mod.hpp"
-#include "../modular/multiply.hpp"
-#include "../modulus.hpp"
+#include "mate/core/modulus.hpp"
+#include "mate/modular/mod.hpp"
+#include "mate/modular/multiply.hpp"
 
 namespace mate
 {
-    template <Domain dmn, typename Set, typename = std::enable_if_t<is_set_v<Set>>>
-    inline constexpr std::decay_t<Set> mod(Set&& set, dmn modulus)
+    template <Set Set_>
+    inline constexpr auto mod(Set_&& set, Domain_type<Set_> modulus)
     {
-        using Set_t = std::decay_t<Set>;
-        static_assert(std::is_same_v<typename Set_t::value_type, dmn>);
+        using Set_t = std::decay_t<Set_>;
 
         Set_t result;
         auto fn_reduce = [&result, modulus](const auto elem)

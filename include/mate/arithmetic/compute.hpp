@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "mate/domain.hpp"
-#include "mate/operation.hpp"
+#include "mate/core/domain.hpp"
+#include "mate/core/operation.hpp"
 
 #include "mate/arithmetic/add.hpp"
 #include "mate/arithmetic/multiply.hpp"

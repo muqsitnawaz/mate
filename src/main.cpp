@@ -1,8 +1,8 @@
 
 #include <fmt/format.h>
 
-#include "mate/group.hpp"
-#include "mate/quotient_group.hpp"
+#include "mate/algebra/group.hpp"
+#include "mate/algebra/quotient_group.hpp"
 #include "mate/algorithm/prime.hpp"
 
 using namespace mate;

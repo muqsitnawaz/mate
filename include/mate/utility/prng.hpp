@@ -4,7 +4,7 @@
 #include <random>
 #include <unordered_map>
 
-#include "../modulus.hpp"
+#include "mate/core/modulus.hpp"
 #include "hash.hpp"
 
 namespace mate

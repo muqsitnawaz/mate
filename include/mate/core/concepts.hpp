@@ -1,5 +1,7 @@
 
-#include "../polynomial.hpp"
+#pragma once
+
+#include "mate/core/polynomial.hpp"
 
 namespace mate
 {

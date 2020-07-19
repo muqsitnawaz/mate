@@ -1,7 +1,7 @@
 
 #include <gtest/gtest.h>
 
-#include "mate/polynomial.hpp"
+#include "mate/core/polynomial.hpp"
 
 TEST(PolynomialTest, Construct)
 {

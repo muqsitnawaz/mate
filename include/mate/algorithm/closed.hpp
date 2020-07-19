@@ -9,18 +9,17 @@
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 
-#include "../alias.hpp"
-#include "../domain.hpp"
-#include "../modulus.hpp"
-#include "../operation.hpp"
+#include "mate/core/set.hpp"
+#include "mate/core/modulus.hpp"
+#include "mate/core/operation.hpp"
 
 #include "../arithmetic/compute.hpp"
 #include "../modular/compute.hpp"
 
 namespace mate
 {
-    template <Operation opr, typename Set>
-    inline constexpr bool is_closed(Set&& set) noexcept
+    template <Operation opr, Set Set_>
+    inline constexpr bool is_closed(Set_&& set) noexcept
     {
         namespace rg = ranges;
 
@@ -31,18 +30,16 @@ namespace mate
         auto pairs = ranges::views::join(set | ranges::views::transform(fn_make_pairs));
         auto fn_not_exists = [&set](const auto p)
         {
-            return rg::find(set, compute<Domain_type<Set>, opr>(p.first, p.second)) == rg::end(set);
+            return rg::find(set, compute<Domain_type<Set_>, opr>(p.first, p.second)) == rg::end(set);
         };
         return ranges::find_if(pairs, fn_not_exists) == ranges::end(pairs);
     }
 
-    template <Domain dmn, Operation opr, typename Set>
-    inline constexpr bool is_closed(Set&& set, Modulus<dmn> modulus) noexcept
+    template <Operation opr, Set Set_>
+    inline constexpr bool is_closed(Set_&& set, Modulus<Domain_type<Set_>> modulus) noexcept
     {
+        using dmn = Domain_type<Set_>;
         namespace rg = ranges;
-
-        // Verify that modulus and set domain is the same.
-        static_assert(std::is_same_v<Domain_type<Set>, dmn>);
 
         auto fn_make_pairs = [&set](const auto elem)
         {

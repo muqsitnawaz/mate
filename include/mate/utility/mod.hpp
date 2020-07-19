@@ -3,7 +3,7 @@
 
 #include <tuple>
 
-#include "../domain.hpp"
+#include "mate/core/domain.hpp"
 
 namespace mate
 {

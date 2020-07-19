@@ -12,7 +12,7 @@
 #include <range/v3/iterator/insert_iterators.hpp>
 #include <range/v3/range/conversion.hpp>
 
-#include "concepts/std.hpp"
+#include "mate/concepts/std.hpp"
 
 // TODO: Needs a memory pool.
 
@@ -26,32 +26,6 @@ namespace mate
     {
     public:
         using coeff_type = Int;
-
-        inline polynomial operator+(const polynomial& other) const
-        {
-            assert(data_.size() == other.data_.size());
-
-            polynomial sum(data_.size());
-            ranges::transform(data_, other.data_, sum.data_.begin(), std::plus());
-            return sum;
-        }
-
-        inline polynomial operator*(const polynomial& other) const
-        {
-            assert(data_.size() == other.data_.size());
-
-            polynomial sum(data_.size());
-            ranges::transform(data_, other.data_, sum.data_.begin(), std::multiplies());
-            return sum;
-        }
-
-        inline polynomial operator%(const Int modulus) const
-        {
-            polynomial reduced(data_.size());
-            const auto fn_reduce = [modulus](const auto elem) { return elem % modulus; };
-            ranges::transform(data_, reduced.data_.begin(), fn_reduce);
-            return reduced;
-        }
 
         inline void print() const noexcept
         {
@@ -83,6 +57,32 @@ namespace mate
         {
             data_.reserve(data.size());
             ranges::move(data, ranges::back_inserter(data_));
+        }
+
+        inline polynomial operator+(const polynomial& other) const
+        {
+            assert(data_.size() == other.data_.size());
+
+            polynomial sum(data_.size());
+            ranges::transform(data_, other.data_, sum.data_.begin(), std::plus());
+            return sum;
+        }
+
+        inline polynomial operator*(const polynomial& other) const
+        {
+            assert(data_.size() == other.data_.size());
+
+            polynomial sum(data_.size());
+            ranges::transform(data_, other.data_, sum.data_.begin(), std::multiplies());
+            return sum;
+        }
+
+        inline polynomial operator%(const Int modulus) const
+        {
+            polynomial reduced(data_.size());
+            const auto fn_reduce = [modulus](const auto elem) { return elem % modulus; };
+            ranges::transform(data_, reduced.data_.begin(), fn_reduce);
+            return reduced;
         }
     };
 }

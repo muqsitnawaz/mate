@@ -1,8 +1,8 @@
 
 #pragma once
 
-#include "concepts/std.hpp"
-#include "concepts/core.hpp"
+#include "mate/concepts/std.hpp"
+#include "concepts.hpp"
 
 namespace mate
 {

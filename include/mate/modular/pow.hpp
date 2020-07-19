@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "../domain.hpp"
+#include "mate/core/domain.hpp"
 
 #include "mod.hpp"
 #include "multiply.hpp"

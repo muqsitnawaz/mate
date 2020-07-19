@@ -1,8 +1,9 @@
 
 #pragma once
 
-#include "mate/domain.hpp"
-#include "mod.hpp"
+#include "mate/arithmetic/multiply.hpp"
+#include "mate/core/domain.hpp"
+#include "mate/modular/mod.hpp"
 
 namespace mate
 {
@@ -10,6 +11,6 @@ namespace mate
     inline constexpr dmn multiply(dmn op1, dmn op2, dmn modulus) noexcept
     {
         // TODO: Change the implementation to use barret reduction.
-        return mod(op1 * op2, modulus);
+        return mod(multiply(op1, op2), modulus);
     }
 }

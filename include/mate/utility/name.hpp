@@ -1,7 +1,7 @@
 
 #pragma once
 
-#include "../operation.hpp"
+#include "mate/core/operation.hpp"
 
 namespace mate
 {
