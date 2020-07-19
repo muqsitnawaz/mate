@@ -1,22 +1,20 @@
 
-#include <type_traits>
-
-#include <initializer_list>
+#include "../polynomial.hpp"
 
 namespace mate
 {
     namespace meta_
     {
         template <typename>
-        struct is_std_initializer_list : std::false_type {};
-
-        template <typename E>
-        struct is_std_initializer_list<std::initializer_list<E>> : std::true_type {};
+        struct is_polynomial : std::false_type {};
 
         template <typename T>
-        inline constexpr bool is_std_initializer_list_v = is_std_initializer_list<T>::value;
+        struct is_polynomial<is_polynomial<T>> : std::true_type {};
+
+        template <typename T>
+        inline constexpr bool is_polynomial_v = is_polynomial<T>::value;
     }
 
     template <typename T>
-    concept InitializerList = meta_::is_std_initializer_list_v<T>;
+    concept Polynomial = meta_::is_polynomial_v<T>;
 }
