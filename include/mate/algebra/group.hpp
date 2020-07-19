@@ -1,18 +1,11 @@
 
 #pragma once
 
-#include <exception>
-#include <vector>
-
-#include <range/v3/algorithm/transform.hpp>
-#include <range/v3/numeric/accumulate.hpp>
-
-#include "mate/algorithm/closed.hpp"
-#include "mate/algorithm/identity.hpp"
-#include "mate/algorithm/inverse.hpp"
-#include "mate/core/domain.hpp"
-#include "mate/core/operation.hpp"
+#include "mate/algorithm/is_closed.hpp"
+#include "mate/algorithm/has_identity.hpp"
+#include "mate/algorithm/has_inverses.hpp"
 #include "mate/core/set.hpp"
+#include "mate/core/operation.hpp"
 #include "mate/utility/name.hpp"
 
 namespace mate
@@ -21,7 +14,7 @@ namespace mate
     auto make_group(Set_&& set);
 
     template <Domain dmn, Operation opr>
-    class Group
+    class group
     {
     public:
         using dmn_type = dmn;
@@ -38,8 +31,6 @@ namespace mate
 
     private:
         set_type elements_;
-
-        Group() = default;
 
         template <Domain dmn_, Operation opr_, Set Set_>
         friend auto make_group(Set_&& elements);
@@ -63,7 +54,7 @@ namespace mate
             throw std::invalid_argument(fmt::format("Set is not closed under {}.", name<opr_>()));
         }
 
-        using Group_t = Group<dmn_, opr_>;
+        using Group_t = group<dmn_, opr_>;
 
         Group_t group;
         group.elements_ = std::forward<typename Group_t::set_type>(set);

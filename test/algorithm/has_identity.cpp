@@ -1,7 +1,7 @@
 
 #include <gtest/gtest.h>
 
-#include "mate/algorithm/identity.hpp"
+#include "mate/algorithm/has_identity.hpp"
 
 TEST(IdentityTest, Additive)
 {

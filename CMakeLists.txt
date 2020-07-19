@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
-project(mate LANGUAGES CXX VERSION 0.0.1)
+project(mate LANGUAGES CXX VERSION 0.0.1 DESCRIPTION "Post-modern C++ library for abstract algebra")
 include(cmake/StandardProjectSettings.cmake)
 include(cmake/PreventInSourceBuilds.cmake)
 
@@ -24,11 +24,6 @@ include(cmake/StaticAnalyzers.cmake)
 # Set include dirs.
 set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM /usr/local/include)
-
-# Basic.
-add_executable(main src/main.cpp)
-target_include_directories(main PRIVATE ${INCLUDE_DIR})
-target_link_libraries(main PRIVATE project_warnings)
 
 function(mate_add_test TESTNAME EXENAME FIRSTSOURCE)
     add_executable(${EXENAME} ${FIRSTSOURCE} ${ARGN})

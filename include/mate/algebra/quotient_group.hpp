@@ -3,12 +3,14 @@
 
 #include <range/v3/numeric/iota.hpp>
 
+#include "mate/algorithm/is_closed.hpp"
+#include "mate/algorithm/has_identity.hpp"
+#include "mate/algorithm/has_inverses.hpp"
 #include "mate/algorithm/mod.hpp"
-#include "mate/core/domain.hpp"
+#include "mate/core/set.hpp"
 #include "mate/core/operation.hpp"
 #include "mate/core/modulus.hpp"
-#include "mate/utility/type.hpp"
-#include "mate/utility/mod.hpp"
+#include "mate/utility/name.hpp"
 
 namespace mate
 {
@@ -26,7 +28,7 @@ namespace mate
         using opr_type = opr;
         using set_type = Set_type<dmn>;
 
-        inline void print()
+        inline void print() const
         {
             for (auto elem : elements_)
             {
@@ -39,8 +41,6 @@ namespace mate
 
     private:
         set_type elements_;
-
-        QuotientGroup() = default;
 
         template <Domain dmn_, Operation opr_>
         friend auto make_quotient_group(Modulus<dmn_> modulus);

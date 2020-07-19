@@ -3,7 +3,7 @@
 
 #include <range/v3/algorithm/for_each.hpp>
 
-#include "mate/core/modulus.hpp"
+#include "mate/core/set.hpp"
 #include "mate/modular/mod.hpp"
 #include "mate/modular/multiply.hpp"
 

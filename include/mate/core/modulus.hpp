@@ -2,7 +2,6 @@
 #pragma once
 
 #include "mate/arithmetic/abs.hpp"
-#include "mate/arithmetic/subtract.hpp"
 #include "mate/core/domain.hpp"
 #include "mate/utility/mod.hpp"
 

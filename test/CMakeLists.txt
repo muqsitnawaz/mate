@@ -17,6 +17,6 @@ set(BUILD_GTEST ON CACHE BOOL "" FORCE)
 
 FetchContent_MakeAvailable(googletest)
 
+add_subdirectory(algebra)
 add_subdirectory(algorithm)
-
-mate_add_test(test.polynomial polynomial polynomial.cpp)
+add_subdirectory(core)

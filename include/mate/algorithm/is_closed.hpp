@@ -9,12 +9,10 @@
 #include <range/v3/view/join.hpp>
 #include <range/v3/view/transform.hpp>
 
+#include "mate/algorithm/apply.hpp"
 #include "mate/core/set.hpp"
 #include "mate/core/modulus.hpp"
 #include "mate/core/operation.hpp"
-
-#include "../arithmetic/compute.hpp"
-#include "../modular/compute.hpp"
 
 namespace mate
 {
@@ -30,7 +28,7 @@ namespace mate
         auto pairs = ranges::views::join(set | ranges::views::transform(fn_make_pairs));
         auto fn_not_exists = [&set](const auto p)
         {
-            return rg::find(set, compute<Domain_type<Set_>, opr>(p.first, p.second)) == rg::end(set);
+            return rg::find(set, apply<Domain_type<Set_>, opr>(p.first, p.second)) == rg::end(set);
         };
         return ranges::find_if(pairs, fn_not_exists) == ranges::end(pairs);
     }
@@ -48,7 +46,7 @@ namespace mate
         auto pairs = ranges::views::join(set | ranges::views::transform(fn_make_pairs));
         auto fn_not_exists = [&set, mod = static_cast<dmn>(modulus)](const auto p)
         {
-            return rg::find(set, compute<dmn, opr>(p.first, p.second, mod)) == rg::end(set);
+            return rg::find(set, apply<dmn, opr>(p.first, p.second, mod)) == rg::end(set);
         };
         return ranges::find_if(pairs, fn_not_exists) == ranges::end(pairs);
     }
