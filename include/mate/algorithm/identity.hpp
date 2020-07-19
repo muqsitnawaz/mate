@@ -14,7 +14,7 @@ namespace mate
     {
         if constexpr (std::is_integral<dmn>())
         {
-            if constexpr (meta_::is_add_t<opr>())
+            if constexpr (meta_::is_add_v<opr>)
             {
                 // Ådditive identity.
                 return static_cast<dmn>(0);

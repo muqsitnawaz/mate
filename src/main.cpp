@@ -9,9 +9,6 @@ using namespace mate;
 
 int main()
 {
-    fmt::print("Additive identity: {}\n", get_identity<int, Addition>());
-    fmt::print("Multiplicative identity: {}\n", get_identity<int, Multiplication>());
-
     using Set = std::unordered_set<int>;
 
     Set set = {1, 2, 3};
@@ -45,6 +42,6 @@ int main()
     auto quot_group1 = make_quotient_group<uint, Addition>(set5, mod5);
     quot_group1.print();
 
-    // Miller rabin test fails when 65537 is int.
-    fmt::print("Is prime: {}.\n", is_prime<uint>(65537, 10));
+    // Miller rabin test fails when 65537 is int: overflow. Add assertions.
+    fmt::print("Is prime: {}.\n", is_prime<long int>(65537, 10));
 }

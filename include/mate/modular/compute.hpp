@@ -13,7 +13,7 @@ namespace mate
     template <Domain dmn, Operation opr>
     inline constexpr dmn compute(dmn op1, dmn op2, dmn modulus)
     {
-        if constexpr (meta_::is_add_t<opr>())
+        if constexpr (meta_::is_add_v<opr>)
         {
             return mod(add(op1, op2), modulus);
         }

@@ -57,7 +57,7 @@ namespace mate
     auto make_quotient_group(Modulus<_dmn> modulus)
     {
         std::vector<_dmn> elems(modulus.width());
-        if constexpr (meta_::is_add_t<_opr>())
+        if constexpr (meta_::is_add_v<_opr>)
         {
             ranges::iota(elems, modulus.bounds().first);
         }

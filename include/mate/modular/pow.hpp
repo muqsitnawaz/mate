@@ -19,8 +19,7 @@ namespace mate
         while (y > 0)
         {
             // If y is odd, multiply x with result
-            if (y & 1)
-            { res = multiply(res, x, modulus); }
+            if (y & 1) { res = multiply(res, x, modulus); }
 
             // y must be even now
             y = y >> 1;

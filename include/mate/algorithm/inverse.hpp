@@ -16,7 +16,7 @@ namespace mate
     template <SignedInteger dmn, Operation opr>
     inline constexpr dmn inverse(dmn value) noexcept
     {
-        if constexpr (meta_::is_add_t<opr>())
+        if constexpr (meta_::is_add_v<opr>)
         {
             return -value;
         }
@@ -29,7 +29,7 @@ namespace mate
     template <UnsignedInteger dmn, Operation opr>
     inline constexpr dmn inverse(dmn value, dmn modulus) noexcept
     {
-        if constexpr (meta_::is_add_t<opr>())
+        if constexpr (meta_::is_add_v<opr>)
         {
             return mod(modulus - mod(value, modulus), modulus);
         }
@@ -61,10 +61,12 @@ namespace mate
     template <Domain dmn, Operation opr, typename Set>
     inline constexpr bool has_inverses(Set&& set, Modulus<dmn> modulus) noexcept
     {
+        static_assert(is_set_v<Set>);
+
         using namespace ranges::views;
 
         // Verify that modulus and set domain is the same.
-        static_assert(std::is_same_v<Domain_type<Set>, dmn>);
+        static_assert(std::is_same_v<Domain_type<Set>, dmn>, "Must belong to same domain.");
 
         auto fn_get_inverse = [mod = static_cast<dmn>(modulus)](const auto elem)
         {

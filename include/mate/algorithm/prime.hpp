@@ -14,7 +14,7 @@ namespace mate
         if (input <= 3) { return true; }
 
         dmn d = input - 1;
-        while (mod(d, static_cast<dmn>(2)) == static_cast<dmn>(0)) { d /= 2; }
+        while (!mod(d, static_cast<dmn>(2))) { d /= 2; }
 
         for ([[maybe_unused]] const auto idx : ranges::views::indices(iterations))
         {

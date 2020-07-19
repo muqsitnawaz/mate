@@ -22,21 +22,22 @@ enable_sanitizers(project_options)
 include(cmake/StaticAnalyzers.cmake)
 
 # Set include dirs.
+set(INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM /usr/local/include)
 
 # Basic.
 add_executable(main src/main.cpp)
-target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(main PRIVATE ${INCLUDE_DIR})
 target_link_libraries(main PRIVATE project_warnings)
 
 function(mate_add_test TESTNAME EXENAME FIRSTSOURCE)
     add_executable(${EXENAME} ${FIRSTSOURCE} ${ARGN})
-    target_include_directories(${EXENAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
     target_link_libraries(${EXENAME} gtest gtest_main)
+    target_include_directories(${EXENAME} PRIVATE ${INCLUDE_DIR})
     add_test(${TESTNAME} ${EXENAME})
 endfunction(mate_add_test)
 
-if(MATE_TESTS)
+if(MATE_TESTS OR CMAKE_BUILD_TYPE STREQUAL "Debug")
     enable_testing()
     include(GoogleTest)
     add_subdirectory(test)
