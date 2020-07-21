@@ -16,9 +16,8 @@ macro(run_conan)
     conan_cmake_run(
             REQUIRES
             fmt/6.2.0
-            spdlog/1.5.0
+            range-v3/0.10.0@ericniebler/stable
             OPTIONS
-            ${CONAN_EXTRA_OPTIONS}
             BASIC_SETUP
             CMAKE_TARGETS # individual targets to link to
             BUILD

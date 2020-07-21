@@ -3,6 +3,7 @@
 
 #include <tuple>
 
+#include "mate/arithmetic/subtract.hpp"
 #include "mate/core/domain.hpp"
 
 namespace mate

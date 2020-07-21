@@ -3,6 +3,8 @@
 
 #include "mate/arithmetic/add.hpp"
 #include "mate/arithmetic/multiply.hpp"
+#include "mate/modular/add.hpp"
+#include "mate/modular/multiply.hpp"
 #include "mate/core/domain.hpp"
 #include "mate/core/operation.hpp"
 

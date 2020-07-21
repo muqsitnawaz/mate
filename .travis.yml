@@ -1,0 +1,25 @@
+language: cpp
+
+install:
+  - pip install --user conan cmake
+
+jobs:
+  include:
+    - os: osx
+      compiler: clang
+      osx_image: xcode11.2
+      env:
+        - PATH="${HOME}/Library/Python/2.7/bin:${PATH}"
+        - PATH="/usr/local/opt/llvm/bin:${PATH}"
+        - MATRIX_EVAL="brew install llvm && CC=/usr/local/opt/llvm/bin/clang && CXX=/usr/local/opt/llvm/bin/clang++"
+
+
+before_script:
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - mkdir build
+  - cd build
+  - cmake -D ENABLE_COVERAGE:BOOL=TRUE ../
+  - cmake --build . -- -j2
+  - ctest -j2

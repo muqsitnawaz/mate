@@ -9,7 +9,7 @@ TEST(RingTest, Construct)
     auto group = mate::make_group<int, mate::Addition>(set);
     group.print();
 
-    const auto rng = mate::make_ring(group);
+//    const auto rng = mate::make_ring(group);
 }
 
 int main(int argc, char** argv)

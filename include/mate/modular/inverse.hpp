@@ -3,6 +3,7 @@
 
 #include "mate/core/concepts.hpp"
 #include "mate/core/operation.hpp"
+#include "mate/modular/mod.hpp"
 
 namespace mate
 {
